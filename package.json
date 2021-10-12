@@ -1,0 +1,23 @@
+{
+  "name": "ts-cli",
+  "version": "1.0.0",
+  "description": "ts-cli",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tangshuo",
+  "license": "ISC",
+  "bin": {
+    "ts": "bin/ts",
+    "ts-create": "bin/ts-create"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^8.2.0",
+    "download-git-repo": "^3.0.2",
+    "inquirer": "^8.2.0",
+    "ora": "^6.0.1",
+    "rimraf": "^3.0.2",
+    "user-home": "^3.0.0"
+  }
+}

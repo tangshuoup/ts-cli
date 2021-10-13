@@ -6,15 +6,27 @@
  * @Author: tangshuo
  * @Date: 2021-10-09 16:04:08
  * @LastEditors: tangshuo
- * @LastEditTime: 2021-10-12 15:36:27
+ * @LastEditTime: 2021-10-13 14:40:22
  */
 
 
 const program = require('commander')
+
 program
-  .version(require('../package.json').version)
-  .option('-v, --version', 'the version number')
-  .usage('<command> [options]')  // 帮助信息首行提示
-	.command('create', '创建新项目') // 使用独立的可执行文件作为子命令
+  .command('create <app-name>')
   .description('create a new project')
-	.parse(process.argv) // 按照 node约定解析
+  .option('-f, --force', 'overwrite target directory if it exist')
+  .action((name, options) => {
+    console.log('name', name)
+    console.log('options', options)
+    require('./ts-create')(name, options)
+  })
+
+
+program
+  // 配置版本号信息
+  .version(`v${require('../package.json').version}`)
+  .usage('<command> [option]')
+	.parse(process.argv)
+
+  

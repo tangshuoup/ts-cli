@@ -5,36 +5,43 @@
  * @Author: tangshuo
  * @Date: 2021-10-11 17:19:58
  * @LastEditors: tangshuo
- * @LastEditTime: 2021-10-12 15:30:22
+ * @LastEditTime: 2021-10-13 14:45:47
  */
-const program = require('commander')
-// const chalk = require('chalk')
 const path = require('path')
-// const home = require('user-home')
-const fs = require('fs')
-// const inquirer = require('inquirer')
-// const ora = require('ora')
-// const rm = require('rimraf')
-const ask = require('../lib/ask')
-// const download = require('download-git-repo')
+const fs = require('fs-extra')
+const inquirer = require('inquirer')
+const Generator = require('../lib/generator')
 
+const OverWrite = async(targetAir)=>{
+  let { action } = await inquirer.prompt([{
+    name: 'action',
+    type: 'list',
+    message: 'Target directory already exists Pick an action:',
+    choices: [{
+      name: 'OverWrite',
+      value: 'OverWrite'
+    }, {
+      name:'Cancel',
+      value: false
+    }]
+  }])
 
-program
-  .usage('[project-name]')
-  .parse(process.argv)
-  
-// const rawName = program.args[0]
-
-// const projectName = rawName
-  
-
-
-
-function run () {
-  ask().then(answers => {
-    console.log('answers', answers)
-  })
+  if (!action) return
+  console.log('\r\nRemoving...')
+  await fs.remove(targetAir)
 }
 
 
-run()
+module.exports = async function (name, options) {
+  const cwd = process.cwd()
+  const targetAir = path.join(cwd, name)
+  if (fs.existsSync(targetAir)) {
+    if (options.force) {
+      await fs.remove(targetAir)
+    } else {
+      await OverWrite(targetAir)
+    }
+  }
+  const generator = new Generator(name, targetAir)
+  generator.create()
+}

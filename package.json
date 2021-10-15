@@ -1,7 +1,7 @@
 {
-  "name": "shuo-cli",
-  "version": "1.0.4",
-  "description": "shuo-cli",
+  "name": "tangshuo-cli",
+  "version": "1.0.0",
+  "description": "tangshuo-cli",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,8 +17,6 @@
     "download-git-repo": "^3.0.2",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.2.0",
-    "ora": "^4.0.3",
-    "rimraf": "^3.0.2",
-    "user-home": "^3.0.0"
+    "ora": "^4.0.3"
   }
 }
